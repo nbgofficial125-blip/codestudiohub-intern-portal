@@ -101,30 +101,35 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-subtle">
       {/* Hero Section */}
       <section 
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.85) 100%), url(${heroBackground})`,
+          backgroundImage: `url(${heroBackground})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+        
+        {/* Animated orbs */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary/30 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/30 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: "1s" }} />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
-              <Rocket className="w-4 h-4 text-white" />
-              <span className="text-white text-sm font-medium">Now Accepting Applications</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-primary/20 to-secondary/20 border-2 border-primary/50 mb-6 shadow-[0_0_20px_hsl(var(--primary)/0.3)]">
+              <Rocket className="w-4 h-4 text-primary animate-pulse" />
+              <span className="text-foreground text-sm font-bold">Now Accepting Applications</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight neon-glow">
               Internship Opportunity at{" "}
-              <span className="gradient-text bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="gradient-text bg-gradient-neon" style={{ backgroundSize: "200% 200%" }}>
                 CodeStudioHub
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Build real-world products. Learn from industry experts. Launch your tech career.
             </p>
             
@@ -133,10 +138,10 @@ const Index = () => {
                 onClick={scrollToForm}
                 variant="hero" 
                 size="lg"
-                className="text-lg px-8 py-6 h-auto"
+                className="text-lg px-8 py-6 h-auto group"
               >
-                Apply Now
-                <Rocket className="ml-2 w-5 h-5" />
+                <span className="relative z-10">Apply Now</span>
+                <Rocket className="ml-2 w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button 
                 variant="glass" 
@@ -151,8 +156,8 @@ const Index = () => {
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-white/50 rounded-full" />
+          <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-2 shadow-[0_0_15px_hsl(var(--primary)/0.5)]">
+            <div className="w-1 h-3 bg-primary rounded-full shadow-[0_0_10px_hsl(var(--primary))]" />
           </div>
         </div>
       </section>
@@ -162,9 +167,9 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
-                <Building2 className="w-4 h-4 text-accent" />
-                <span className="text-accent text-sm font-medium">About CodeStudioHub</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-accent/20 to-secondary/20 border-2 border-accent/50 mb-4 shadow-[0_0_15px_hsl(var(--accent)/0.3)]">
+                <Building2 className="w-4 h-4 text-accent animate-pulse" />
+                <span className="text-accent text-sm font-bold">About CodeStudioHub</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold">
@@ -184,9 +189,9 @@ const Index = () => {
                   { icon: TrendingUp, title: "Career Growth", desc: "Build portfolio and industry connections" },
                   { icon: Award, title: "Performance-Based", desc: "Earn based on your contributions" },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4 p-4 rounded-lg bg-card border hover-lift">
-                    <div className="p-2 rounded-lg bg-accent/10">
-                      <item.icon className="w-5 h-5 text-accent" />
+                  <div key={idx} className="flex items-start gap-4 p-4 rounded-lg glass-card hover-lift">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+                      <item.icon className="w-5 h-5 text-background" />
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">{item.title}</h3>
@@ -198,12 +203,14 @@ const Index = () => {
             </div>
             
             <div className="relative animate-fade-in">
-              <div className="absolute -inset-4 bg-gradient-accent rounded-lg opacity-20 blur-xl" />
-              <img 
-                src={teamCollaboration} 
-                alt="Team collaboration" 
-                className="relative rounded-lg shadow-large w-full"
-              />
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary via-secondary to-accent rounded-lg opacity-30 blur-2xl animate-pulse-slow" />
+              <div className="relative rounded-xl overflow-hidden border-2 border-primary/50 shadow-[0_0_30px_hsl(var(--primary)/0.5)]">
+                <img 
+                  src={teamCollaboration} 
+                  alt="Team collaboration" 
+                  className="w-full"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -213,9 +220,9 @@ const Index = () => {
       <section id="details" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto">
           <div className="text-center mb-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
-              <Zap className="w-4 h-4 text-accent" />
-              <span className="text-accent text-sm font-medium">Internship Details</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-accent/20 to-secondary/20 border-2 border-accent/50 mb-4 shadow-[0_0_15px_hsl(var(--accent)/0.3)]">
+              <Zap className="w-4 h-4 text-accent animate-pulse" />
+              <span className="text-accent text-sm font-bold">Internship Details</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Program Overview</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -229,43 +236,49 @@ const Index = () => {
                 icon: Building2, 
                 label: "Company", 
                 value: "CodeStudioHub",
-                desc: "Leading tech solutions provider"
+                desc: "Leading tech solutions provider",
+                color: "primary"
               },
               { 
                 icon: Code, 
                 label: "Project Type", 
                 value: "Client & In-house",
-                desc: "Real-world development experience"
+                desc: "Real-world development experience",
+                color: "secondary"
               },
               { 
                 icon: Clock, 
                 label: "Duration", 
                 value: "1 / 2 / 3 Months",
-                desc: "Flexible commitment options"
+                desc: "Flexible commitment options",
+                color: "accent"
               },
               { 
                 icon: Globe, 
                 label: "Mode", 
                 value: "Online & Offline",
-                desc: "Work from anywhere or on-site"
+                desc: "Work from anywhere or on-site",
+                color: "primary"
               },
               { 
                 icon: TrendingUp, 
                 label: "Stipend", 
                 value: "Performance-based",
-                desc: "Earn as you contribute"
+                desc: "Earn as you contribute",
+                color: "secondary"
               },
               { 
                 icon: Award, 
                 label: "Evaluation", 
                 value: "S4 Performance Model",
-                desc: "Fair and transparent assessment"
+                desc: "Fair and transparent assessment",
+                color: "accent"
               },
             ].map((item, idx) => (
-              <Card key={idx} className="hover-lift border-2">
+              <Card key={idx} className="glass-card hover-lift animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
                 <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-gradient-accent flex items-center justify-center mb-4">
-                    <item.icon className="w-6 h-6 text-white" />
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br from-${item.color} to-${item.color === 'primary' ? 'secondary' : item.color === 'secondary' ? 'accent' : 'primary'} flex items-center justify-center mb-4 shadow-[0_0_20px_hsl(var(--${item.color})/0.5)]`}>
+                    <item.icon className="w-6 h-6 text-background" />
                   </div>
                   <CardTitle className="text-lg">{item.label}</CardTitle>
                   <CardDescription className="text-base font-semibold text-foreground">
@@ -285,9 +298,9 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
-              <CheckCircle2 className="w-4 h-4 text-accent" />
-              <span className="text-accent text-sm font-medium">What You'll Learn</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-primary/20 to-secondary/20 border-2 border-primary/50 mb-4 shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+              <CheckCircle2 className="w-4 h-4 text-primary animate-pulse" />
+              <span className="text-primary text-sm font-bold">What You'll Learn</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Skills & Responsibilities</h2>
             <p className="text-lg text-muted-foreground">
@@ -296,10 +309,10 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="hover-lift">
+            <Card className="glass-card hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-accent flex items-center justify-center mb-4">
-                  <Code className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4 shadow-[0_0_20px_hsl(var(--primary)/0.5)]">
+                  <Code className="w-6 h-6 text-background" />
                 </div>
                 <CardTitle>Website Development</CardTitle>
                 <CardDescription>Frontend & Backend mastery</CardDescription>
@@ -321,10 +334,10 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-lift">
+            <Card className="glass-card hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-accent flex items-center justify-center mb-4">
-                  <Smartphone className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary to-accent flex items-center justify-center mb-4 shadow-[0_0_20px_hsl(var(--secondary)/0.5)]">
+                  <Smartphone className="w-6 h-6 text-background" />
                 </div>
                 <CardTitle>App Development</CardTitle>
                 <CardDescription>Hybrid & Native platforms</CardDescription>
@@ -346,10 +359,10 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-lift md:col-span-2">
+            <Card className="glass-card hover-lift md:col-span-2">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-accent flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center mb-4 shadow-[0_0_20px_hsl(var(--accent)/0.5)]">
+                  <Users className="w-6 h-6 text-background" />
                 </div>
                 <CardTitle>Professional Development</CardTitle>
                 <CardDescription>Beyond technical skills</CardDescription>
@@ -380,9 +393,9 @@ const Index = () => {
       <section className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
-              <Star className="w-4 h-4 text-accent" />
-              <span className="text-accent text-sm font-medium">Success Stories</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-secondary/20 to-accent/20 border-2 border-secondary/50 mb-4 shadow-[0_0_15px_hsl(var(--secondary)/0.3)]">
+              <Star className="w-4 h-4 text-secondary animate-pulse" />
+              <span className="text-secondary text-sm font-bold">Success Stories</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">What Our Interns Say</h2>
             <p className="text-lg text-muted-foreground">
@@ -411,16 +424,16 @@ const Index = () => {
                 rating: 5,
               },
             ].map((testimonial, idx) => (
-              <Card key={idx} className="hover-lift">
+              <Card key={idx} className="glass-card hover-lift animate-fade-in" style={{ animationDelay: `${idx * 150}ms` }}>
                 <CardContent className="pt-6">
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                      <Star key={i} className="w-4 h-4 fill-primary text-primary drop-shadow-[0_0_8px_hsl(var(--primary))]" />
                     ))}
                   </div>
                   <p className="text-sm mb-4 italic">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-accent" />
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary via-secondary to-accent shadow-[0_0_15px_hsl(var(--primary)/0.5)]" />
                     <div>
                       <p className="font-semibold text-sm">{testimonial.name}</p>
                       <p className="text-xs text-muted-foreground">{testimonial.role}</p>
@@ -437,18 +450,18 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
-              <MapPin className="w-4 h-4 text-accent" />
-              <span className="text-accent text-sm font-medium">Get In Touch</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-primary/20 to-accent/20 border-2 border-primary/50 mb-4 shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+              <MapPin className="w-4 h-4 text-primary animate-pulse" />
+              <span className="text-primary text-sm font-bold">Get In Touch</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Visit or Contact Us</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="hover-lift">
+            <Card className="glass-card hover-lift">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-accent" />
+                  <MapPin className="w-5 h-5 text-primary drop-shadow-[0_0_10px_hsl(var(--primary))]" />
                   Office Location
                 </CardTitle>
               </CardHeader>
@@ -474,17 +487,17 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-lift">
+            <Card className="glass-card hover-lift">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Phone className="w-5 h-5 text-accent" />
+                  <Phone className="w-5 h-5 text-secondary drop-shadow-[0_0_10px_hsl(var(--secondary))]" />
                   Contact Information
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                    <Phone className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-4 rounded-lg glass-card">
+                    <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5 drop-shadow-[0_0_10px_hsl(var(--primary))]" />
                     <div>
                       <p className="font-semibold mb-1 text-sm">Phone Numbers</p>
                       <a href="tel:+919867153231" className="text-sm text-muted-foreground hover:text-accent block">
@@ -496,8 +509,8 @@ const Index = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                    <Mail className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-4 rounded-lg glass-card">
+                    <Mail className="w-5 h-5 text-secondary shrink-0 mt-0.5 drop-shadow-[0_0_10px_hsl(var(--secondary))]" />
                     <div>
                       <p className="font-semibold mb-1 text-sm">Email</p>
                       <a href="mailto:info@codestudiohub.com" className="text-sm text-muted-foreground hover:text-accent">
@@ -506,8 +519,8 @@ const Index = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                    <Clock className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-4 rounded-lg glass-card">
+                    <Clock className="w-5 h-5 text-accent shrink-0 mt-0.5 drop-shadow-[0_0_10px_hsl(var(--accent))]" />
                     <div>
                       <p className="font-semibold mb-1 text-sm">Office Hours</p>
                       <p className="text-sm text-muted-foreground">Monday - Friday: 10:00 AM - 6:00 PM</p>
@@ -534,9 +547,9 @@ const Index = () => {
       <section id="application-form" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
-              <Rocket className="w-4 h-4 text-accent" />
-              <span className="text-accent text-sm font-medium">Join Our Team</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-gradient-to-r from-primary/20 to-secondary/20 border-2 border-primary/50 mb-4 shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+              <Rocket className="w-4 h-4 text-primary animate-pulse" />
+              <span className="text-primary text-sm font-bold">Join Our Team</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Apply Now</h2>
             <p className="text-lg text-muted-foreground">
@@ -544,7 +557,7 @@ const Index = () => {
             </p>
           </div>
 
-          <Card className="hover-lift border-2">
+          <Card className="glass-card hover-lift border-4">
             <CardContent className="pt-6">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -687,11 +700,11 @@ const Index = () => {
                   type="submit" 
                   variant="hero" 
                   size="lg"
-                  className="w-full"
+                  className="w-full group"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
-                  {!isSubmitting && <Rocket className="ml-2 w-4 h-4" />}
+                  <span className="relative z-10">{isSubmitting ? "Submitting..." : "Submit Application"}</span>
+                  {!isSubmitting && <Rocket className="ml-2 w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />}
                 </Button>
 
                 <p className="text-xs text-center text-muted-foreground">
@@ -704,19 +717,20 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-12 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <footer className="relative bg-gradient-to-br from-background via-card to-background border-t-2 border-primary/50 py-12 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5" />
+        <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">CodeStudioHub</h3>
-              <p className="text-sm text-primary-foreground/80 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 gradient-text">CodeStudioHub</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 Building the next generation of developers through hands-on experience and expert mentorship.
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-primary-foreground/80">
+              <h4 className="font-semibold mb-4 text-primary">Quick Links</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <button onClick={() => document.getElementById("details")?.scrollIntoView({ behavior: "smooth" })} className="hover:text-primary-foreground">
                     Program Details
@@ -736,8 +750,8 @@ const Index = () => {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <ul className="space-y-2 text-sm text-primary-foreground/80">
+              <h4 className="font-semibold mb-4 text-primary">Contact</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
                   <span>Sector 18, Vashi, Navi Mumbai</span>
@@ -758,8 +772,8 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="border-t border-primary-foreground/20 pt-8 text-center">
-            <p className="text-sm text-primary-foreground/60">
+          <div className="border-t border-primary/30 pt-8 text-center">
+            <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} CodeStudioHub. All rights reserved.
             </p>
           </div>
