@@ -128,9 +128,9 @@ const Index = () => {
               <span className="text-foreground text-sm font-bold">Now Accepting Applications</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight neon-glow">
-              Internship Opportunity at{" "}
-              <span className="gradient-text bg-gradient-neon" style={{ backgroundSize: "200% 200%" }}>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <span className="text-foreground">Internship Opportunity at</span>{" "}
+              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-extrabold drop-shadow-lg">
                 CodeStudioHub
               </span>
             </h1>
