@@ -39,6 +39,7 @@ const applicationSchema = z.object({
   duration: z.string().min(1, "Please select duration"),
   mode: z.string().min(1, "Please select mode"),
   skills: z.string().trim().min(10, "Please provide details about your skills").max(1000),
+  resume: z.any().optional(),
   webhookUrl: z.string().url("Invalid webhook URL").optional().or(z.literal("")),
 });
 
@@ -61,21 +62,26 @@ const Index = () => {
     console.log("Form submission:", data);
 
     try {
-      // If webhook URL is provided, send data there
       const webhookUrl = data.webhookUrl || "";
       
       if (webhookUrl) {
+        const formData = new FormData();
+        
+        // Add all form fields to FormData
+        Object.entries(data).forEach(([key, value]) => {
+          if (key === 'resume' && value instanceof FileList && value.length > 0) {
+            formData.append('resume', value[0]);
+          } else if (key !== 'resume' && key !== 'webhookUrl') {
+            formData.append(key, value as string);
+          }
+        });
+        
+        formData.append('timestamp', new Date().toISOString());
+        formData.append('source', 'CodeStudioHub Internship Application');
+        
         await fetch(webhookUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "no-cors",
-          body: JSON.stringify({
-            ...data,
-            timestamp: new Date().toISOString(),
-            source: "CodeStudioHub Internship Application",
-          }),
+          body: formData,
         });
       }
 
@@ -678,6 +684,20 @@ const Index = () => {
                   {errors.skills && (
                     <p className="text-sm text-destructive">{errors.skills.message}</p>
                   )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="resume">Upload Resume (PDF, DOC, DOCX)</Label>
+                  <Input
+                    id="resume"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    {...register("resume")}
+                    className="cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Accepted formats: PDF, DOC, DOCX (Max 5MB)
+                  </p>
                 </div>
 
                 <div className="space-y-2">
